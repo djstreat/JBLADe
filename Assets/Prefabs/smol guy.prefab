@@ -99,7 +99,7 @@ MonoBehaviour:
   dead: 0
   homeObject: {fileID: 0}
   assignedResource: {fileID: 0}
-  speed: 0
+  speed: 2
 --- !u!70 &7688611692780433003
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
