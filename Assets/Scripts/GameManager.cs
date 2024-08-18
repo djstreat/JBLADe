@@ -2,19 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using TMPro;
 using UnityEngine;
 
 
 public class GameManager : MonoBehaviour
 {
-    
+    private TextMeshProUGUI _workerCountGUI;
     private const float SecondsToIdleTrigger = 2.0f;
-    
     private List<IdleResourceObject> _idlerResourceObjects;
-
     private float _idlerTriggerTime;
-    
-    
+
+    public List<WorkerUnit> allWorkers;
     
     // Start is called before the first frame update
     void Start()

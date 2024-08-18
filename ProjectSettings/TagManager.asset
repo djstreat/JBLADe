@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Resource
+  - LevelObjectsContainer
+  - Home
+  - Worker
   layers:
   - Default
   - TransparentFX

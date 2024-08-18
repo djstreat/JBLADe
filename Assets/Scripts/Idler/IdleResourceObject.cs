@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,7 +14,8 @@ public class IdleResourceObject : MonoBehaviour
     
     public GameObject textboxGO; // Textbox object
     public string resourceName;
-    public int workersCount;
+    public List<WorkerUnit> workers;
+    public int resourceQuality;
     
     // Start is called before the first frame update
     void Start()
@@ -24,12 +26,22 @@ public class IdleResourceObject : MonoBehaviour
 
     public void Collect()
     {
-        resourceCount += workersCount;
+        resourceCount += workers.Count * resourceQuality;
     }
     
     // Update is called once per frame
     void Update()
     {
         _resourceTextBox.text = $"{resourceName}: {resourceCount}";
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // Debug.Log($"{resourceName} was triggered.");
+        if (other.CompareTag("Worker"))
+        {
+            WorkerUnit worker = other.GetComponent<WorkerUnit>();
+            worker.ToggleTarget(); // Switches direction
+        }
     }
 }
