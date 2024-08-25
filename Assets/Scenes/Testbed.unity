@@ -1658,7 +1658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allWorkers: []
-  stoneCoinText: {fileID: 0}
+  stoneCoinText: {fileID: 1958076997}
   craftStoneCoinButton: {fileID: 40120266}
 --- !u!4 &1049940920
 Transform:

@@ -26,7 +26,7 @@ public class IdleResourceObject : MonoBehaviour
 
     public void Collect()
     {
-        resourceCount += workers.Count * resourceQuality;
+        resourceCount +=  resourceQuality;
     }
 
     public int GetResourceCount()
