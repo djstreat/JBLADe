@@ -49,6 +49,7 @@ public class IdleResourceObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         _resourceTextBox.text = $"{resourceName}: {resourceCount}";
     }
 

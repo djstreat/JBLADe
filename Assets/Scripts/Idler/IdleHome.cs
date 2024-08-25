@@ -21,7 +21,11 @@ public class IdleHome : MonoBehaviour
         Debug.Log($"Home was triggered.");
         if (other.CompareTag("Worker"))
         {
+            Debug.Log($"Is Worker");
             WorkerUnit worker = other.GetComponent<WorkerUnit>();
+            if (worker.headingHome())
+                Debug.Log($"collect");
+                worker.assignedResource.Collect();
             worker.ToggleTarget(); // Switches direction
         }
     }
