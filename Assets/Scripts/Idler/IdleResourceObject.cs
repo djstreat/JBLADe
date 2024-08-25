@@ -28,6 +28,23 @@ public class IdleResourceObject : MonoBehaviour
     {
         resourceCount += workers.Count * resourceQuality;
     }
+
+    public int GetResourceCount()
+    {
+        return resourceCount;
+    }
+
+    public void ConsumeResource(int amount)
+    {
+        if (resourceCount >= amount)
+        {
+            resourceCount -= amount;
+        }
+        else
+        {
+            Debug.LogWarning($"Attempted to consume more {resourceName} than available.");
+        }
+    }
     
     // Update is called once per frame
     void Update()
