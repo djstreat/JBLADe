@@ -26,6 +26,11 @@ public class WorkerUnit : MonoBehaviour
         assignedResource = resourceObject.GetComponent<IdleResourceObject>();
     }
 
+    public void GoHome()
+    {
+        headHome = true;
+    }
+    
     public void ToggleTarget()
     {
         headHome = !headHome;
