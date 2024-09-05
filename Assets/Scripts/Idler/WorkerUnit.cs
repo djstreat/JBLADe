@@ -6,18 +6,22 @@ using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 public class WorkerUnit : MonoBehaviour
 {
+    private static int TOTAL_WORKERS = 0;
     private bool headHome = false;
     public bool active = false;
     public bool dead = false;
     public GameObject homeObject;
     public IdleResourceObject assignedResource;
     public float speed;
+    public string name;
     
     // Start is called before the first frame update
     void Start()
     {
         homeObject = GameObject.FindGameObjectWithTag("Home");
         // assignedResource = null;
+        name = $"Worker {TOTAL_WORKERS}";
+        TOTAL_WORKERS++;
     }
 
     private void AssignResource(GameObject resourceObject)
