@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Idler;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -12,9 +14,11 @@ public class GameManager : MonoBehaviour
     private const float SecondsToIdleTrigger = 2.0f;
     private List<IdleResourceObject> _idlerResourceObjects;
     private float _idlerTriggerTime;
-
+    
+    public GameObject workerPrefab;
     public List<WorkerUnit> allWorkers;
     public GameObject workerCountObj;
+    public GameObject homeObj;
     
     // Start is called before the first frame update
     void Start()
@@ -38,6 +42,7 @@ public class GameManager : MonoBehaviour
         }
         Debug.Log($"Manager has {_idlerResourceObjects.Count} objs.");
         if (workerCountObj != null) _workerCountGUI = workerCountObj.GetComponent<TextMeshProUGUI>();
+        if (!homeObj) homeObj = GameObject.FindGameObjectWithTag("Home");
     }
 
     // Update is called once per frame
@@ -59,6 +64,26 @@ public class GameManager : MonoBehaviour
         
         // Track the Worker Count
         _workerCountGUI.text = $"Worker Count: {allWorkers.Count}";
+    }
+
+    public void CreateWorker()
+    {
+        // Check if you've bought the workers.
+        foreach (IdleResourceObject resource in _idlerResourceObjects)
+        {
+            if (!resource.CanBuyWorker()) {
+                Debug.Log("Not enough money to buy a worker"); // Should make a notification saying you cannot buy a worker.
+                return;
+            }
+        }
+        // Once you've confirmed, you can take the resources
+        foreach (IdleResourceObject resource in _idlerResourceObjects)
+        {
+            resource.BuyWorker();
+        }
+        var newWorker = Instantiate(workerPrefab, homeObj.transform.position, quaternion.identity); // Create worker
+        
+        allWorkers.Add(newWorker.GetComponent<WorkerUnit>());// Add worker to the list
     }
 
     public WorkerUnit AssignWorker()
