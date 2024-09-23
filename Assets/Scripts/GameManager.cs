@@ -1,11 +1,9 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Idler;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -14,6 +12,7 @@ public class GameManager : MonoBehaviour
     private const float SecondsToIdleTrigger = 2.0f;
     private List<IdleResourceObject> _idlerResourceObjects;
     private float _idlerTriggerTime;
+    private int _gameSceneIndex;
     
     public GameObject workerPrefab;
     public List<WorkerUnit> allWorkers;
@@ -23,6 +22,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Manager IS LOADING.");
+        _gameSceneIndex = 1;
         // Get workers in scene if they exist
         GameObject[] strayWorkers = GameObject.FindGameObjectsWithTag("Worker");
         foreach (var worker in strayWorkers)
@@ -34,7 +35,6 @@ public class GameManager : MonoBehaviour
         
         _idlerTriggerTime = 0.0f;
         _idlerResourceObjects = new List<IdleResourceObject>();
-        Debug.Log("Manager IS LOADING.");
         var objs = GameObject.FindGameObjectsWithTag("Resource");
         foreach (var resource in objs)
         {
@@ -108,5 +108,10 @@ public class GameManager : MonoBehaviour
         }
 
         return assignedWorkers;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(_gameSceneIndex);
     }
 }
